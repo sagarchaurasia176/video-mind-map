@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     // <ThemeProvider>
       <TooltipProvider>
         <SessionGuard>
-          <SidebarProvider defaultOpen={true}>
+          <SidebarProvider defaultOpen={false}>
             <AppSidebar />
             <main className="w-full h-full" data-theme="cerberus">
               {children}

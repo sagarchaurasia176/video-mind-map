@@ -14,19 +14,15 @@ export function TranscriptFetcher() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!url.trim()) {
       setError("Please enter a valid URL");
       return;
     }
-
     setLoading(true);
     setError(null);
     setTranscript(null);
-
     try {
       const result = await fetchTranscript(url);
-
       if (result.success && result.data) {
         setTranscript(result.data.text || JSON.stringify(result.data, null, 2));
       } else {
@@ -38,13 +34,6 @@ export function TranscriptFetcher() {
       setLoading(false);
     }
   };
-
-  console.log("transcript");
-  console.log(transcript);
-  
-  
-
-
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       {/* Header Section */}
