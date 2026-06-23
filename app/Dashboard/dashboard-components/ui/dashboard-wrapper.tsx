@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import ResizeableComponent from "./dashboard-center-component";
 import Image from "next/image";
+import Loader from "@/app/loading";
 
 export default function DashboardWrapper() {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +21,7 @@ export default function DashboardWrapper() {
     return (
       <div className="flex items-center justify-center gap-4 h-full">
         <div className="text-center">
-        <p>almost done....</p>
-        <Image alt="gif-loader" src="https://res.cloudinary.com/djfixzkqe/image/upload/v1780909979/arrow_jfgxoe.gif" width={100} height={100} />
+          <Loader/>
           </div>
       </div>
     );

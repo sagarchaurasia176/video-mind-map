@@ -7,6 +7,7 @@ import { validateSession } from "@/app/_actions/session-logics/validateSession";
 import { initializeSession } from "@/app/_actions/session-logics/initializeSession";
 import { clearDeviceToken } from "@/app/_actions/session-logics/clearDeviceToken";
 import Image from "next/image";
+import Loader from "@/app/loading";
 
 interface SessionGuardProps {
   children: React.ReactNode;
@@ -84,8 +85,7 @@ export default function SessionGuard({ children }: SessionGuardProps) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-        <Image alt="gif-loader" src="https://res.cloudinary.com/djfixzkqe/image/upload/v1780909979/arrow_jfgxoe.gif" width={100} height={100} />
-        <p>validating session.....</p>
+        <Loader/>
         </div>
       </div>
     );
