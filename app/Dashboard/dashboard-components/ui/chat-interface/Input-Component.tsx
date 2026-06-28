@@ -2,7 +2,7 @@ import { TranscriptFetcher } from "@/components/TranscriptFetcher";
 
 const InputComponent = () => {
   return (
-    <div className="flex items-center  top-12 relative max-h-screen   justify-center px-4 py-8">
+    <div className="w-full max-w-5xl">
       <TranscriptFetcher />
     </div>
   );

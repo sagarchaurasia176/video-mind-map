@@ -3,10 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import { Toaster } from "sonner";
-import dynamic from "next/dynamic";
-// import { ThemeProvider } from "next-themes";
 import { ContextProvider } from "./context/GlobalStateManager";
-import NavbarDemo from "@/components/resizable-navbar-demo";
 
 
 const geistSans = Geist({
@@ -35,7 +32,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <NavbarDemo />
         <ContextProvider>
           {children}
           <Toaster position="bottom-center" />

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import ResizeableComponent from "./dashboard-center-component";
-import Image from "next/image";
 import Loader from "@/app/loading";
 
 export default function DashboardWrapper() {

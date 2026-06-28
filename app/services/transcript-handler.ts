@@ -23,8 +23,6 @@ export async function fetchTranscript(url: string): Promise<TranscriptResponse> 
     });
 
     const data: TranscriptResponse = await response.json();
-    console.log(data);
-    
     if (!response.ok) {
       throw new Error(data.error || data.message || "Failed to fetch transcript");
     }
