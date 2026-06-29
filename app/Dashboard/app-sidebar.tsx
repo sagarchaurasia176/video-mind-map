@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from "@/components/ui/sidebar";
-import { Home, Map, Settings, User } from "lucide-react";
+import { Home, Map, User } from "lucide-react";
 import Link from "next/link";
 
 export function AppSidebar() {
@@ -34,7 +34,6 @@ export function AppSidebar() {
           <span className="text-base font-bold text-gray-900">TopicFlow</span>
         </Link>
       </SidebarHeader>
-
       <SidebarContent className="p-4">
         <SidebarGroup>
           <SidebarMenu className="space-y-1">
@@ -64,7 +63,7 @@ export function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
 
-          {/* add feature more here */}
+            {/* add feature more here */}
             {/* <SidebarMenuItem>
               <SidebarMenuButton
                 asChild

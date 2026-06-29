@@ -18,7 +18,7 @@ const page = () => {
   return (
     <div className="h-screen">
       <Suspense fallback={<DashboardLoading />}>
-        <DashboardWrapper /> 
+        <DashboardWrapper />
       </Suspense>
     </div>
   );
