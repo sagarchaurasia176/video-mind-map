@@ -54,7 +54,7 @@ export const auth = betterAuth({
     },
   },
   cors: {
-    origin: process.env.BETTER_AUTH_URL,
+    origin: process.env.BETTER_AUTH_URL || "https://video-mind-map.vercel.app",
     credentials: true,
   },
   onError: (error: Error, request: Request) => {
