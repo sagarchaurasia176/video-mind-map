@@ -1,12 +1,12 @@
 "use client";
-
 import Link from "next/link";
-import { useSession } from "@/lib/auth-client";
-import SignOutForm from "@/components/ui/signout-form";
+import { useGlobalContextApiState } from "@/app/context/GlobalStateManager";
+import { Button } from "@/components/ui/button";
+import SignOutForm from "@/components/sign-out.form";
+import { LogOut, User } from "lucide-react";
 
 export default function Navbar() {
-  const { data: session, isPending } = useSession();
-  const isLoggedIn = !!session?.user;
+  const { User: user, loading } = useGlobalContextApiState();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
@@ -32,44 +32,56 @@ export default function Navbar() {
             <span className="text-lg font-bold text-gray-900">TopicFlow</span>
           </Link>
 
-          {/* Right side buttons */}
-          {!isPending && (
-            <div className="flex items-center gap-3">
-              {isLoggedIn ? (
-                <>
-                  <Link
-                    href="/Dashboard"
-                    className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+          {/* Auth Buttons */}
+          <div className="flex items-center gap-3">
+            {loading ? (
+              <div className="px-4 py-2 text-sm text-gray-500">Loading...</div>
+            ) : user ? (
+              // User is logged in
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/Dashboard"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+                >
+                  Dashboard
+                </Link>
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
+                  <User className="w-4 h-4 text-gray-600" />
+                  <span className="text-sm text-gray-700 font-medium">
+                    {user.name || user.email}
+                  </span>
+                </div>
+                <SignOutForm>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-2"
+                    type="submit"
                   >
-                    Dashboard
-                  </Link>
-                  <SignOutForm>
-                    <button
-                      type="submit"
-                      className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-                    >
-                      Logout
-                    </button>
-                  </SignOutForm>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/Dashboard"
-                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </Button>
+                </SignOutForm>
+              </div>
+            ) : (
+              // User is not logged in
+              <>
+                <Link href="/sign-in">
+                  <Button variant="ghost" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/sign-in">
+                  <Button
+                    size="sm"
+                    className="bg-indigo-600 hover:bg-indigo-700"
                   >
-                    Sign in
-                  </Link>
-                  <Link
-                    href="/Dashboard"
-                    className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
-                  >
-                    Get started
-                  </Link>
-                </>
-              )}
-            </div>
-          )}
+                    Get Started Free
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </nav>

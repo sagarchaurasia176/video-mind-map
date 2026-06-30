@@ -13,7 +13,7 @@ export default function SignOutForm({
 
   const handleSignOut = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       await authClient.signOut({
         fetchOptions: {
@@ -35,9 +35,5 @@ export default function SignOutForm({
     }
   };
 
-  return (
-    <form onSubmit={handleSignOut}>
-      {children}
-    </form>
-  );
+  return <form onSubmit={handleSignOut}>{children}</form>;
 }

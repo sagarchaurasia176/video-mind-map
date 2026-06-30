@@ -1,43 +1,72 @@
-"use client"
-import { createContext, ReactNode, useContext, useState } from "react";
+"use client";
+import { createContext, ReactNode, useContext, useState, useEffect } from "react";
+import { User } from "@/lib/userType";
+import { authClient } from "@/lib/auth/auth-client";
 
-//to create context api
 interface GlobalState {
-  user: string | null;
-  setUser: React.Dispatch<React.SetStateAction<string | null>>;
+  User: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  refreshUser: () => Promise<void>;
 }
-//consumer
+
 const userContext = createContext<GlobalState | undefined>(undefined);
+
 type userContextProviderProps = {
+  User: User | null;
   children: ReactNode;
 };
 
-//export the context-api
-//this fnc() you can used in the layout.tsx file
-export const ContextProvider = ({ children }: userContextProviderProps) => {
-  //defiend all the state
-  const [user, setUser] = useState<string | null>(null);
+export const ContextProvider = ({ 
+  User: initialUser, 
+  children 
+}: userContextProviderProps) => {
+  const [User, setUser] = useState<User | null>(initialUser);
   const [loading, setLoading] = useState<boolean>(false);
+  
+  const refreshUser = async () => {
+    try {
+      setLoading(true);
+      const session = await authClient.getSession();
+      
+      if (session?.data?.user) {
+        const user = session.data.user as User;
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error("Error refreshing user session:", error);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
+  // Refresh user session on mount and when auth state changes
+  useEffect(() => {
+    if (!initialUser) {
+      refreshUser();
+    }
+  }, []);
+  
   const values: GlobalState = {
-    user,
+    User,
     setUser,
     loading,
     setLoading,
+    refreshUser,
   };
-  //consumer
+  
   return <userContext.Provider value={values}>{children}</userContext.Provider>;
 };
 
-//export global contextapi | this you can used in the whole project file
 export const useGlobalContextApiState = () => {
   const useGlobalComp = useContext(userContext);
   if (!useGlobalComp) {
     throw new Error(
-      "useGlobalContextApiState must be used within a userContextProvider",
+      "useGlobalContextApiState must be used within a ContextProvider",
     );
   }
   return useGlobalComp;
