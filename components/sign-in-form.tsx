@@ -30,8 +30,8 @@ import { useGlobalContextApiState } from "@/app/context/GlobalStateManager";
 
 export default function SignInForm() {
   const router = useRouter();
-    
   const { refreshUser } = useGlobalContextApiState();
+
   const form = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {

@@ -24,7 +24,7 @@ export async function fetchTranscript(url: string): Promise<TranscriptResponse> 
 
     const data: TranscriptResponse = await response.json();
     if (!response.ok) {
-      throw new Error(data.error || data.message || "Failed to fetch transcript");
+     throw new Error(data.error || data.message || "Failed to fetch transcript. The video may not have captions available or may be restricted. Please try a different URL.");
     }
 
     return data;

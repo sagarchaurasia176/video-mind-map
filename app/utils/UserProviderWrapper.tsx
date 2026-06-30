@@ -17,9 +17,6 @@ export default function UserProviderWrapper({
   initialUser,
 }: UserProviderWrapperProps) {
   const [user, setUser] = useState<User | null>(initialUser);
-  const lastSessionCheck = useRef<number>(0);
-  const checkIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
   //function to refresh the user state from the server
   const refreshUser = useCallback(async () => {
     try {
@@ -56,7 +53,7 @@ export default function UserProviderWrapper({
     setUser(initialUser);
   }, [initialUser]);
   return (
-    <ContextProvider User={user} setUser={setUser} refreshUser={refreshUser}>
+    <ContextProvider User={user} refreshUser={refreshUser}>
       {children}
     </ContextProvider>
   );

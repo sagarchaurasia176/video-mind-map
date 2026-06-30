@@ -1,8 +1,7 @@
 'use client';
-import * as React from "react";
 import { Button } from "@radix-ui/themes";
 import { Avatar } from "@radix-ui/themes";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth/auth-client";
 
 interface RadixDropdownMenuCheckboxDemoProps {
   side?: "top" | "bottom" | "left" | "right";

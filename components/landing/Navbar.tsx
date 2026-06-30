@@ -35,7 +35,7 @@ export default function Navbar() {
           {/* Auth Buttons */}
           <div className="flex items-center gap-3">
             {loading ? (
-              <div className="px-4 py-2 text-sm text-gray-500">Loading...</div>
+              <div className="px-4 py-2 text-sm text-gray-500">Welcome To Topic Flow</div>
             ) : user ? (
               // User is logged in
               <div className="flex items-center gap-3">
