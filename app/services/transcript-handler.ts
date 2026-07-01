@@ -1,7 +1,3 @@
-/**
- * Frontend utility to fetch transcript from the API
- */
-
 export interface TranscriptResponse {
   success: boolean;
   message: string;
@@ -12,7 +8,9 @@ export interface TranscriptResponse {
   error?: string;
 }
 
-export async function fetchTranscript(url: string): Promise<TranscriptResponse> {
+export async function fetchTranscript(
+  url: string,
+): Promise<TranscriptResponse> {
   try {
     const response = await fetch("/api/transcript", {
       method: "POST",
@@ -24,9 +22,12 @@ export async function fetchTranscript(url: string): Promise<TranscriptResponse> 
 
     const data: TranscriptResponse = await response.json();
     if (!response.ok) {
-     throw new Error(data.error || data.message || "Failed to fetch transcript. The video may not have captions available or may be restricted. Please try a different URL.");
+      throw new Error(
+        data.error ||
+          data.message ||
+          "Failed to fetch transcript. The video may not have captions available or may be restricted. Please try a different URL.",
+      );
     }
-
     return data;
   } catch (error) {
     console.error("Fetch transcript error:", error);
@@ -37,4 +38,3 @@ export async function fetchTranscript(url: string): Promise<TranscriptResponse> 
     };
   }
 }
-
